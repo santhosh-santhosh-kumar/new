@@ -1,36 +1,35 @@
 import React from "react";
-function Card(){
-    return(
-        <>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <div className="container px-4 px-lg-5">
-            <a className="navbar-brand" href="#!">Start Bootstrap</a>
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    <li className="nav-item"><a className="nav-link active" aria-current="page" href="#!">Home</a></li>
-                    <li className="nav-item"><a className="nav-link" href="#!">About</a></li>
-                    <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                        <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a className="dropdown-item" href="#!">All Products</a></li>
-                            <li><hr className="dropdown-divider" /></li>
-                            <li><a className="dropdown-item" href="#!">Popular Items</a></li>
-                            <li><a className="dropdown-item" href="#!">New Arrivals</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <form className="d-flex">
-                    <button className="btn btn-outline-dark" type="submit">
-                        <i className="bi-cart-fill me-1"></i>
-                        Cart
-                        <span className="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                    </button>
-                </form>
-            </div>
+import { useState } from 'react';
+function Card({ catagory,addToCart,removeCart}) {
+  const [cart,setCart]=useState('Add to Cart')
+   function changeCart(){
+    setCart(cart=='Add to Cart'?'Remove from Cart':'Add to Cart')
+    if(cart=='Remove from Cart'){
+      removeCart(catagory)
+    
+    }else{
+      addToCart(catagory)
+    }
+
+   }
+  return (
+    <>
+      <div className="col-lg-2 mt-5">
+        <div className="card">
+          <div className="card-body">
+          <img src={catagory.img} className="card-img-top" alt="..." />
+            <h5 className="card-title">{catagory.name}</h5>
+            <p className="card-text">{catagory.stock}</p>
+            <p className="card-text">Price : {catagory.price}</p>
+            <p className="card-text">Offer : {catagory.offer}</p>
+            <p className="card-text">{catagory.deleveriy}</p>
+            <button className="btn btn-primary" onClick={changeCart}>{cart}</button><br></br>
+            <button className="btn btn-primary buy">buy now</button>
+          </div>
         </div>
-    </nav>
-                </>  
-    );
+      </div>
+    
+    </>
+  );
 }
 export default Card;
